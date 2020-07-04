@@ -149,26 +149,17 @@ const continueOperation = async () => {
     {
       name: "operation",
       message: "continue?",
-      type: "list",
-      choices: [
-        {
-          name: "Yes",
-          value: "Yes",
-        },
-        {
-          name: "No",
-          value: "No",
-        },
-      ],
+      type: "confirm",
     },
   ];
-  const { operation } = await inquirer.prompt(question_continue);
-
-  if (operation === "Yes") {
-    init();
-  } else {
-    connection.end;
-  }
+  //const { operation } = await inquirer.prompt(question_continue);
+  inquirer.prompt(question_continue).then((result) => {
+    if (result.operation) {
+      init();
+    } else {
+      connection.end;
+    }
+  });
 };
 
 //////////////////////////////////
